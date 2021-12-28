@@ -1,5 +1,5 @@
 # polygon-wars
-A simple 2D game using ECS (Entity, Component, System) design, SFML, and modern C++
+A simple 2D game using ECS (Entity, Component, System) Game Engine design, SFML, and modern C++
 
 ## Instructions
 To build: <code> mkdir build && cd build && cmake .. && make </code> (at project root)<br>
