@@ -19,9 +19,7 @@ class RandInt {
     std::default_random_engine re;
     std::uniform_int_distribution<> dist;
 public:
-    RandInt(int low, int high): dist{low, high} {
-        re.seed(std::random_device{}());
-    }
+    RandInt(int low, int high): dist{low, high} { random_seed(); }
     int operator () () { return dist(re); }
     void seed(int s) { re.seed(s); }
     void random_seed() { re.seed(std::random_device{}()); }

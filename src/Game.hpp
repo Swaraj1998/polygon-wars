@@ -40,6 +40,7 @@ class Game
     int                 m_score = 0;
     int                 m_currentFrame = 0;
     int                 m_lastEnemySpawnTime = 0;
+    int                 m_specialWeaponCount = 50;
     bool                m_paused = false;
     bool                m_running = true;
 
@@ -55,7 +56,7 @@ class Game
     void sRender();
     void sEnemySpawner();
     void sCollision();
-    // ==================
+    // ===================
 
     void spawnPlayer();
     void spawnEnemy();
