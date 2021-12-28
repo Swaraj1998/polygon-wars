@@ -1,5 +1,7 @@
 # polygon-wars
-A simple 2D game using ECS (Entity, Component, System) Game Engine design, SFML, and modern C++
+A simple 2D game using ECS (Entity, Component, System) Game Engine design, SFML, and modern C++.
+
+Just Point and Shoot at random polygons that spawn at random locations in specified intervals.
 
 Based off of this [Game Programming Course](https://www.youtube.com/playlist?list=PL_xRyXins848jkwC9Coy7B4N5XTOnQZzz)
 
