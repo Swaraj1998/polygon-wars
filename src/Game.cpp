@@ -142,7 +142,14 @@ void Game::spawnBullet(std::shared_ptr<Entity> player, const Vec2& mousePos)
 
 void Game::spawnSpecialWeapon(std::shared_ptr<Entity> entity)
 {
+    if (m_specialWeaponCount <= 0) return;
 
+    const int numBullets = m_playerConfig.V;
+    for (int i = 0; i < numBullets; ++i) {
+        float angle = ((360.0f/numBullets) * (i + 1)) * PI / 180.0f;
+        spawnBullet(entity, Vec2(cosf(angle), sinf(angle)).scale(1000000));
+    }
+    --m_specialWeaponCount;
 }
 
 // ===== Systems =====
@@ -161,7 +168,7 @@ void Game::sMovement()
     m_player->cTransform->velocity = playerVelocity;
 
     for (auto e : m_entities.getEntities())
-            e->cTransform->pos += e->cTransform->velocity;
+        e->cTransform->pos += e->cTransform->velocity;
 }
 
 void Game::sUserInput()
@@ -199,13 +206,8 @@ void Game::sUserInput()
                 Vec2 mousePos(event.mouseButton.x, event.mouseButton.y);
                 spawnBullet(m_player, mousePos);
             }
-            if (event.mouseButton.button == sf::Mouse::Right && m_specialWeaponCount > 0) {
-                const int numBullets = m_playerConfig.V;
-                for (int i = 0; i < numBullets; ++i) {
-                    float angle = ((360.0f/numBullets) * (i + 1)) * PI / 180.0f;
-                    spawnBullet(m_player, Vec2(cosf(angle), sinf(angle)).scale(1000000));
-                }
-                --m_specialWeaponCount;
+            if (event.mouseButton.button == sf::Mouse::Right) {
+                spawnSpecialWeapon(m_player);
             }
         }
     }
