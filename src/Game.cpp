@@ -317,8 +317,6 @@ void Game::sCollision()
 
 void Game::run()
 {
-    // TODO: Implement pause
-
     while (m_running) {
         m_entities.update();
 
