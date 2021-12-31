@@ -11,4 +11,4 @@ To play: <code> ./main </code> (inside the build directory)
 
 Controls: [W, A, S, D] to move, [left mouse] to shoot, [right mouse] for special weapon, [Space] to pause game
 
-Note: change <code>config.txt</code> to point to a correct font file in your system (or to change other game settings)
+Note: edit <code>config.txt</code> to change various game settings

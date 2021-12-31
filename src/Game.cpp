@@ -34,7 +34,7 @@ void Game::init(const std::string& path)
     m_text.setCharacterSize(fontSize);
     m_text.setFillColor(fontColor);
     m_text.setPosition(0, 0);
-    m_text.setString("Score: 0");
+    m_text.setString("Score 0");
 
     fin >> section;
     assert(section == "Player");
@@ -76,6 +76,10 @@ void Game::spawnPlayer()
     entity->cCollision = std::make_shared<CCollision>(m_playerConfig.CR);
     entity->cInput = std::make_shared<CInput>();
     m_player = entity;
+
+    for (auto p: m_entities.getEntities("player"))
+        if (p != m_player)
+            p->destroy();
 }
 
 void Game::spawnEnemy()
@@ -246,7 +250,7 @@ void Game::sRender()
 
     // Render player score
     std::stringstream ss;
-    ss << "Score: " << m_score << "  SpecialAmmo: " << m_specialWeaponCount;
+    ss << "Score " << m_score << "  SpecialAmmo " << m_specialWeaponCount;
     m_text.setString(ss.str());
     m_window.draw(m_text);
 
@@ -263,6 +267,17 @@ void Game::sCollision()
 {
     for (auto p : m_entities.getEntities("player")) {
         for (auto e : m_entities.getEntities("enemy")) {
+            float dist = p->cTransform->pos.dist(e->cTransform->pos);
+            if (dist < p->cCollision->radius + e->cCollision->radius) {
+                p->destroy();
+                spawnPlayer();
+                m_score /= 2;
+            }
+        }
+    }
+
+    for (auto p : m_entities.getEntities("player")) {
+        for (auto e : m_entities.getEntities("small")) {
             float dist = p->cTransform->pos.dist(e->cTransform->pos);
             if (dist < p->cCollision->radius + e->cCollision->radius) {
                 p->destroy();
